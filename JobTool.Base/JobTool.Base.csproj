@@ -43,6 +43,7 @@
     <Compile Include="IHelp.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="Services\IFibonacciCalculatorService.cs" />
     <Compile Include="Services\ICommandParserService.cs" />
     <Compile Include="Services\IUserInterfaceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

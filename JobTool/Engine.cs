@@ -44,12 +44,12 @@ namespace JobTool {
                     {
                         command.Execute(parameter);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
-                        string errorMessage = String.Format("Error executing command '{0}' with parameter '{1}'",
-                            command, parameter);
+                        string errorMessage = String.Format("Error executing command '{0}' with parameter '{1}'", command, parameter);
+                 
                         ui.Output(errorMessage);
-                        logger.Error(errorMessage,ex);
+                        logger.Error(errorMessage, ex);
                     }
                 }
                 else

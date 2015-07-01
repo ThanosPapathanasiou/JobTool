@@ -17,8 +17,8 @@ namespace JobTool
         private static void Main(string[] args)
         {
             var container = Infrastructure.BootstrapContainer()
-                                          .ApplyPreferences(useNLog:true,
-                                                            useLoggingInterceptor:true);
+                                           .ApplyPreferences(useNLog:true,
+                                                             useLoggingInterceptor:true);
             var engine = container.Resolve<IEngine>();
             engine.Run();
         }
