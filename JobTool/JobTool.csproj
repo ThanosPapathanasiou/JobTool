@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine.cs" />
+    <Compile Include="HandlerSelectors\GenericHandlerSelector.cs" />
     <Compile Include="Infrastructure.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Interceptors\LoggingInterceptor.cs" />
