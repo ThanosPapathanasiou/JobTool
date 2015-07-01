@@ -32,8 +32,7 @@ namespace JobTool.Service
                 }
                 catch
                 {
-                    //expected
-                    parameter = null;
+                    parameter = input2;
                 }
             }
             else
