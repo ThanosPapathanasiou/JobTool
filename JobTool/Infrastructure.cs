@@ -9,7 +9,10 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using JobTool.Base;
 using JobTool.Base.Interfaces;
+using JobTool.Base.Services;
+using JobTool.HandlerSelectors;
 using JobTool.Interceptors;
+using JobTool.Services;
 
 
 namespace JobTool
@@ -32,13 +35,26 @@ namespace JobTool
         public static IWindsorContainer ApplyPreferences(
             this IWindsorContainer container,
             bool useNLog = true,
-            bool useLoggingInterceptor = false)
+            bool useLoggingInterceptor = false,
+            bool useMemoizationFibonacciService = true)
         {
-            if(useNLog)
-                container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.NLog).WithConfig("NLog.config"));
-            
-            if(useLoggingInterceptor)
+            if (useNLog)
+                container.AddFacility<LoggingFacility>(
+                    f => f.LogUsing(LoggerImplementation.NLog).WithConfig("NLog.config"));
+
+            if (useLoggingInterceptor)
                 container.Register(Component.For<LoggingInterceptor>().LifestyleTransient());
+
+            var memoizationHandler =
+                new GenericHandlerSelector(
+                    (filter) => filter == typeof (IFibonacciCalculatorService),
+                    (handler) => useMemoizationFibonacciService
+                        ? handler.ComponentModel.Implementation == typeof (MemoizedCalculateFibonacciService)
+                        : handler.ComponentModel.Implementation == typeof (FibonacciCalculatorService)
+                    );
+
+            container.Kernel.AddHandlerSelector(memoizationHandler);
+
 
             return container;
         }
